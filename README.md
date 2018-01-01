@@ -25,3 +25,19 @@ Golang Edition Spider
 
 1. github.com/PuerkitoBio/goquery
 2. github.com/go-sql-driver/mysql
+
+
+### How to Use
+
+```
+func main(){
+    config := Spider.Config{}
+	config.MaxDepth = 2
+	config.MaxConnections = 5
+	config.StartUrl = "http://www.fengkai.info"
+	config.StoreTable = "pages5"
+	config.FetchOutsideLinks = false
+	config.DbConfig = "user:password@tcp(127.0.0.1:3306)/test?charset=utf8"
+	Spider.SpiderGo(config)
+}
+```
