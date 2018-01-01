@@ -8,9 +8,9 @@ Golang Edition Spider
 - [x] 抓取深度控制
 - [x] 抓取内容存储：文件、数据库
 - [x] 并发处理控制
-- [ ] User-Agent
+- [x] User-Agent
 - [ ] 代理：设置、频繁更换
-- [ ] POST数据
+- [ ] 表单提交
 - [ ] cookie处理：接收、发送
 
 
@@ -38,6 +38,7 @@ func main(){
 	config.StoreTable = "pages5"
 	config.FetchOutsideLinks = false
 	config.DbConfig = "user:password@tcp(127.0.0.1:3306)/test?charset=utf8"
+	config.UserAgent = "your-ua"
 	Spider.SpiderGo(config)
 }
 ```

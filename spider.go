@@ -17,6 +17,7 @@ type Config struct {
 	FetchOutsideLinks bool
 	StoreTable string
 	DbConfig string
+	UserAgent string
 }
 
 type HtmlPage struct{
@@ -40,7 +41,15 @@ func checkErr(err error) {
 
 func Fetch(htmlUrl HtmlUrl ,queueUrls chan HtmlUrl,fetchResults chan HtmlPage, config Config){
 	if htmlUrl.depth <= config.MaxDepth {
-		resp, err := http.Get(htmlUrl.url)
+		client := &http.Client{}
+		req,err := http.NewRequest("GET", htmlUrl.url, nil)
+		if config.UserAgent != ""{
+			req.Header.Add("User-Agent", config.UserAgent)
+		}else{
+			req.Header.Add("User-Agent", "SpiderGo V1.0")
+		}
+		//resp, err := http.Get(htmlUrl.url)
+		resp, err := client.Do(req)
 		if err != nil {
 			panic(err)
 		}
